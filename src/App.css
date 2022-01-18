@@ -1,38 +1,113 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+body {
+  background: #e5e5e5;
+  width: 80%;
+  margin: 5px auto 5px auto;
+}
+.dashboard-title,
+.latestTransaction-title {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 44px;
+  /* identical to box height */
+  color: #000000;
+}
+.customize-button {
+  list-style-type: none;
+  background: #46bc6e;
+  border-radius: 15px;
+  width: 102px;
+  height: 34px;
+  color: #ffffff;
+  border: none;
+}
+.block {
+  width: 288px;
+  height: 169px;
+  padding: 10px;
+  background: #46bc6e;
+  backdrop-filter: blur(4px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 15px;
+  position: relative;
+}
+.amount-dashboard {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 44px;
+}
+.title-dashboard {
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+  font-size: 24px;
+}
+.inputOutput-button {
+  width: 190.5px;
+  height: 55px;
+  list-style-type: none;
+  border: none;
+}
+.inputOutputButtonGroup {
+  border: 2px solid #000000;
+  border-radius: 7px;
+}
+.inputButton {
+  background-color: "#C4C4C4";
+}
+.input-box {
+  background-color: #c4c4c4;
+  width: 336px;
+  height: 43px;
+  border-radius: 15px;
+  border: none;
+  list-style-type: none;
+  padding: 10px;
+}
+.submit-button,
+.reset-button,
+.change-button {
+  background: #c4c4c4;
+  border: 3px solid #000000;
+  box-sizing: border-box;
+  border-radius: 15px;
+  width: 222px;
+  height: 43px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.transaction-card {
+  background: #302c2c;
+  backdrop-filter: blur(4px);
+  /* Note: backdrop-filter has minimal browser support */
+  padding: 10px;
+  border-radius: 15px;
+  width: 988px;
+  height: 130px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.transaction-card-title,
+.transaction-card-price {
+  color: rgba(255, 255, 255, 1);
 }
-
-.App-link {
-  color: #61dafb;
+.reset-button,
+.change-button {
+  width: 150px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.input-title {
+  width: 90px;
 }
