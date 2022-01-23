@@ -73,7 +73,8 @@ body {
 }
 .submit-button,
 .reset-button,
-.change-button {
+.change-button,
+.showmore-button {
   background: #c4c4c4;
   border: 3px solid #000000;
   box-sizing: border-box;
@@ -105,8 +106,17 @@ input[type="number"] {
   color: rgba(255, 255, 255, 1);
 }
 .reset-button,
-.change-button {
+.change-button,
+.submit-button,
+.showmore-button {
   width: 150px;
+  transition: all 0.3s ease 0s;
+}
+.reset-button:hover,
+.change-button:hover,
+.submit-button:hover,
+.showmore-button:hover {
+  transform: scale(0.9);
 }
 .input-title {
   width: 90px;

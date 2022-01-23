@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   addDoc,
   collection,
@@ -12,25 +12,18 @@ import {
 } from "firebase/firestore";
 import { db } from "../config";
 import { useNavigate } from "react-router-dom";
+import AppContext from "../AppContext";
 
 function Dashboard() {
   let navigate = useNavigate();
+  const [basicInfo, setBasicInfo, history, setHistory, loading, setLoading] =
+    useContext(AppContext);
   const [mode, setMode] = useState("input");
-  const [history, setHistory] = useState([]);
-  // const [saving, setSaving] = useState(0);
-  // const [spending, setSpending] = useState(0);
+  // const [history, setHistory] = useState([]);
+  const [fullHistory, setFullHistory] = useState(false);
   const [info, setInfo] = useState("");
   const [amount, setAmount] = useState(0);
-  const [loading, setLoading] = useState(false);
-  // const [income, setIncome] = useState(0);
-  const [basicInfo, setBasicInfo] = useState({
-    saving: 0,
-    spending: 0,
-    income: 0,
-    incomeGoal: 0,
-    spendingLimit: 0,
-  });
-  const [isInput, setIsInput] = useState(true);
+
   const inputButtonRef = useRef();
   const outputButtonRef = useRef();
 
@@ -71,18 +64,19 @@ function Dashboard() {
     //setDebit((debit) => debit - total);
   };
 
-  const getHistory = async () => {
-    const subColRef = collection(
-      db,
-      "Rujhan",
-      "RujhanHistory",
-      "TransactionHistory"
-    );
-    const qSnap = await getDocs(subColRef, orderBy("timestamp", "desc"));
-    console.log(qSnap);
-    const historyArr = qSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
-    setHistory(historyArr);
-  };
+  // const getHistory = async () => {
+  //   const subColRef = collection(
+  //     db,
+  //     "Rujhan",
+  //     "RujhanHistory",
+  //     "TransactionHistory"
+  //   );
+  //   const qSnap = await getDocs(subColRef, orderBy("timestamp", "desc"));
+  //   console.log(qSnap);
+  //   const historyArr = qSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  //   // const historyReversedArray =
+  //   setHistory(historyArr.reverse());
+  // };
 
   const getGeneralInfo = async () => {
     setLoading(true);
@@ -145,10 +139,6 @@ function Dashboard() {
   //   if()
   // }
 
-  useEffect(() => {
-    getGeneralInfo();
-    getHistory();
-  }, []);
   return (
     <>
       <div className="d-flex justify-content-between align-items-center w-100">
@@ -258,13 +248,26 @@ function Dashboard() {
       </div>
       <div className="latestTransaction-block my-5">
         <h1 className="latestTransaction-title">Latest Transaction</h1>
-        {history &&
-          history.map((item) => (
-            <div className="transaction-card my-3">
-              <p className="transaction-card-title">{item.Remark}</p>
-              <h1 className="transaction-card-price">RM {item.Amount}</h1>
-            </div>
-          ))}
+        {history && !fullHistory
+          ? history.slice(0, 3).map((item) => (
+              <div className="transaction-card my-3">
+                <p className="transaction-card-title">{item.Remark}</p>
+                <h1 className="transaction-card-price">RM {item.Amount}</h1>
+              </div>
+            ))
+          : history.map((item) => (
+              <div className="transaction-card my-3">
+                <p className="transaction-card-title">{item.Remark}</p>
+                <h1 className="transaction-card-price">RM {item.Amount}</h1>
+              </div>
+            ))}
+        <button
+          className="showmore-button"
+          onClick={() => setFullHistory(!fullHistory)}
+        >
+          {" "}
+          Show {fullHistory ? "More" : "Less"}
+        </button>
       </div>
     </>
   );
