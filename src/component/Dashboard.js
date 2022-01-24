@@ -249,24 +249,46 @@ function Dashboard() {
       <div className="latestTransaction-block my-5">
         <h1 className="latestTransaction-title">Latest Transaction</h1>
         {history && !fullHistory
-          ? history.slice(0, 3).map((item) => (
-              <div className="transaction-card my-3">
-                <p className="transaction-card-title">{item.Remark}</p>
-                <h1 className="transaction-card-price">RM {item.Amount}</h1>
-              </div>
-            ))
-          : history.map((item) => (
-              <div className="transaction-card my-3">
-                <p className="transaction-card-title">{item.Remark}</p>
-                <h1 className="transaction-card-price">RM {item.Amount}</h1>
-              </div>
-            ))}
+          ? history.slice(0, 3).map((item) => {
+              if (item.Mode === "input") {
+                return (
+                  <div className="transaction-card input-card my-3">
+                    <p className="transaction-card-title">{item.Remark}</p>
+                    <h1 className="transaction-card-price">RM {item.Amount}</h1>
+                  </div>
+                );
+              } else {
+                return (
+                  <div className="transaction-card output-card my-3">
+                    <p className="transaction-card-title">{item.Remark}</p>
+                    <h1 className="transaction-card-price">RM {item.Amount}</h1>
+                  </div>
+                );
+              }
+            })
+          : history.map((item) => {
+              if (item.Mode === "input") {
+                return (
+                  <div className="transaction-card input-card my-3">
+                    <p className="transaction-card-title">{item.Remark}</p>
+                    <h1 className="transaction-card-price">RM {item.Amount}</h1>
+                  </div>
+                );
+              } else {
+                return (
+                  <div className="transaction-card output-card my-3">
+                    <p className="transaction-card-title">{item.Remark}</p>
+                    <h1 className="transaction-card-price">RM {item.Amount}</h1>
+                  </div>
+                );
+              }
+            })}
         <button
           className="showmore-button"
           onClick={() => setFullHistory(!fullHistory)}
         >
           {" "}
-          Show {fullHistory ? "More" : "Less"}
+          Show {fullHistory ? "Less" : "More"}
         </button>
       </div>
     </>

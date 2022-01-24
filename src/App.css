@@ -121,3 +121,12 @@ input[type="number"] {
 .input-title {
   width: 90px;
 }
+.input-card {
+  background-color: #46bc6e !important;
+}
+.output-card {
+  background-color: #bc3527;
+}
+.showmore-button {
+  align-items: center;
+}
